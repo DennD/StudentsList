@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>StudentsList</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ng-app="student-app">
+<div class="container" ng-controller="indexController">
+    <h1>Список студентов</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>ИМЯ</td>
+            <td>ОЦЕНКА</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="s in students">
+            <td>{{s.id}}</td>
+            <td>{{s.name}}</td>
+            <td>
+                <button class="btn btn-secondary" ng-click="disabledDecrement()" ng-show="s.mark == 1">-</button>
+                <button class="btn btn btn-success" ng-click="decrement(s.id, s.mark)" ng-show="s.mark > 1">-</button>
+                {{s.mark}}
+                <button class="btn btn btn-success" ng-click="increment(s.id, s.mark)" ng-show="s.mark < 5">+</button>
+                <button class="btn btn-secondary" ng-click="disabledIncrement()" ng-show="s.mark == 5">+</button>
+            </td>
+            <td>
+                <button class="btn btn-info" ng-click="showInfoStudent(s.id)">Инфо</button>
+                <button class="btn btn-danger" ng-click="deleteStudent(s.id)">Удалить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p></p>
+    <h3>Добавить студента</h3>
+    <form novalidate ng-submit="createStudent()">
+        <p></p>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Введите имя студента"
+                   ng-model="new_student.name">
+        </div>
+        <p></p>
+        <div class="form-group">
+            <input type="number" class="form-control" placeholder="Введите оценку студента" ng-model="new_student.mark">
+        </div>
+        <p></p>
+        <button type="submit" class="btn btn btn-success">Создать</button>
+    </form>
+</div>
+
+</body>
+</html>
