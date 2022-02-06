@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: postgres:14.1
+    domainname: postgres
+    ports:
+      - "5500:5432"
+    environment:
+      - POSTGRES_DB=students
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
